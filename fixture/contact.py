@@ -70,3 +70,14 @@ class ContactHelper:
         # submit add contact
         wd.find_element_by_xpath("//div[@id='content']/form/input[21]").click()
         self.app.return_to_home_page()
+
+    def delete_first_contact(self):
+        wd = self.app.wd
+        self.app.open_home_page()
+        #select first contact
+        wd.find_element_by_name("selected[]").click()
+        #submit deletion
+        wd.find_element_by_xpath("//input[@value='Delete']").click()
+        #accept the appearing alert in order to proceed
+        wd.switch_to_alert().accept()
+
