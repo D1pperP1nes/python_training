@@ -12,6 +12,13 @@ class Application:
         self.group = GroupHelper(self)
         self.contact = ContactHelper(self)
 
+    def is_valid(self):
+        try:
+            self.wd.current_url #просим браузер сказать какой текущий адрес открытой страницы (если сможет то валиден)
+            return True
+        except:
+            return False
+
     def return_to_home_page(self):
         wd = self.wd
         wd.find_element_by_link_text("home page").click()
