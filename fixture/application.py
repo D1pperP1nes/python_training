@@ -13,6 +13,7 @@ class Application:
         self.contact = ContactHelper(self)
 
     def is_valid(self):
+        wd = self.wd
         try:
             self.wd.current_url #просим браузер сказать какой текущий адрес открытой страницы (если сможет то валиден)
             return True
@@ -25,6 +26,8 @@ class Application:
 
     def open_home_page(self):
         wd = self.wd
+        if wd.current_url.endswith("/addressbook/"):
+            return
         wd.get("http://localhost/addressbook/")
 
     def destroy(self):
