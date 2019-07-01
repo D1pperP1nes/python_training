@@ -7,7 +7,7 @@ class Application:
 
     def __init__(self): #конструктор, кот. инициализирует ссылку на драйвер и помощников
         self.wd = webdriver.Firefox()
-        self.wd.implicitly_wait(30)
+        self.wd.implicitly_wait(5)
         self.session = SessionHelper(self) #помощник получает ссылку на объект класса application фикстуру
         self.group = GroupHelper(self)
         self.contact = ContactHelper(self)
