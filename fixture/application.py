@@ -26,7 +26,7 @@ class Application:
 
     def open_home_page(self):
         wd = self.wd
-        if wd.current_url.endswith("/addressbook/"):
+        if wd.current_url.endswith("/addressbook/") and len(wd.find_elements_by_name("add")) > 0:
             return
         wd.get("http://localhost/addressbook/")
 
