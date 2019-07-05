@@ -1,3 +1,5 @@
+from model.group import Group
+
 class GroupHelper:
 
     def __init__(self, app):
@@ -58,5 +60,13 @@ class GroupHelper:
         self.open_groups_page()
         return len(wd.find_elements_by_name("selected[]"))
 
-
-
+    def get_group_list(self):
+        wd = self.app.wd
+        self.open_groups_page()
+        groups = []
+        for element in wd.find_elements_by_css_selector("span.group"): #в списке полученных элементов запускаем цикл для...
+            text = element.text #для получения текста нужно не вызывать метод get_text а обращаться к свойству text
+            id = element.find_element_by_name("selected[]").get_attribute("value")#чтобы получить идентификатор, внутри элемента span ищем др. элемент с именем selected и у этого чекбокса получаем значение атрибута value
+            #по этим двум свойствам мы должны построить объект типа group и добавить его в некий список(list позднее переименованный в groups), кот. будет в конце возвращаться
+            groups.append(Group(name=text, id=id)) #добавляем в заранее подготовленный список: добавл. новую группу и в качестве параметров этого объекта указываем name и id
+        return groups # возвращаем список
